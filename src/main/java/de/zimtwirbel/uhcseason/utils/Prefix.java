@@ -5,7 +5,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public enum Prefix {
 
-    MAIN("§2UHCSeason §8» §7")
+    MAIN("§2UHCSeason §8» §7"),
+    WL("§cWhitelist §8» §7")
     ;
     private String prefix;
 
