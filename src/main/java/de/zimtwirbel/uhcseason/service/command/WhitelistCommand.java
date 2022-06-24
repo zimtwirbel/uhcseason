@@ -1,5 +1,6 @@
 package de.zimtwirbel.uhcseason.service.command;
 
+import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import de.zimtwirbel.uhcseason.service.WhitelistService;
 import de.zimtwirbel.uhcseason.utils.Prefix;
@@ -12,14 +13,18 @@ import org.springframework.stereotype.Component;
 @Component
 @CommandAlias("wl|whitelist")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class WhitelistCommand {
+public class WhitelistCommand extends BaseCommand {
 
     private final WhitelistService whitelistService;
 
     @Default
     @CatchUnknown
     public void onDefault(Player sender) {
-        sender.sendMessage(Prefix.WL + whitelistService.list());
+        String list = whitelistService.list();
+        if (list.equals(""))
+            sender.sendMessage(Prefix.WL + "§cEs sind keine Spieler auf der §fWhitelist§c!");
+        else
+            sender.sendMessage(Prefix.WL + list);
     }
 
     @Subcommand("add")
